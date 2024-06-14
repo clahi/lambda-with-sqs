@@ -10,12 +10,6 @@ resource "aws_dynamodb_table" "Message" {
     type = "S"
   }
 
-
-  ttl {
-    attribute_name = "TimeToExist"
-    enabled        = false
-  }
-
   tags = {
     Name = "Message"
   }
