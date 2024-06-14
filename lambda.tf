@@ -63,7 +63,7 @@ resource "aws_iam_policy_attachment" "lambdaRolePolicyAttachment" {
 
 data "archive_file" "lambdaFile" {
   type        = "zip"
-  source_file  = "${path.module}/lambda.py"
+  source_file = "${path.module}/lambda.py"
   output_path = "${path.module}/lambda.zip"
 }
 
@@ -89,6 +89,7 @@ resource "aws_lambda_permission" "SQSDynamoDBPermission" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.SQSDynamoDB.function_name
   principal     = "sqs.amazonaws.com"
+  source_arn = aws_sqs_queue.Messages.arn
 }
 
 resource "aws_lambda_event_source_mapping" "sqsTrigger" {
